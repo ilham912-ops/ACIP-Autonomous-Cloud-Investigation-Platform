@@ -1,0 +1,30 @@
+{
+  "playbook_id": "exfiltration_s3",
+  "name": "Investigation - Exfiltration S3",
+  "description": "Declenche lorsqu'un volume anormal de telechargements d'objets S3 (GetObject) est detecte pour un meme acteur.",
+  "applicable_finding_types": ["MASS_DOWNLOAD"],
+  "priority": "HIGH",
+  "tasks": [
+    {
+      "worker_name": "aws_collector",
+      "action": "collect_s3_access_logs",
+      "description": "Recuperer l'ensemble des logs d'acces S3 pour les buckets concernes sur les dernieres 24 heures."
+    },
+    {
+      "worker_name": "correlation_worker",
+      "action": "correlate_actor_network_activity",
+      "description": "Verifier si l'acteur a egalement une activite reseau ou IAM suspecte au meme moment (connexion inhabituelle, changement de permissions recent)."
+    },
+    {
+      "worker_name": "ai_analysis_worker",
+      "action": "summarize_case",
+      "description": "Generer un resume de l'incident, en estimant la sensibilite des donnees potentiellement exposees (types de fichiers, buckets concernes)."
+    }
+  ],
+  "recommended_actions": [
+    "Identifier la nature des objets telecharges (buckets et prefixes concernes) pour evaluer la sensibilite des donnees potentiellement exposees",
+    "Verifier si l'acteur a une raison legitime d'acceder a ce volume de donnees (export planifie, sauvegarde, migration)",
+    "Envisager la revocation temporaire des acces de l'acteur, apres validation par un analyste",
+    "Verifier l'historique recent des politiques IAM de l'acteur, pour ecarter un lien avec une escalade de privileges"
+  ]
+}

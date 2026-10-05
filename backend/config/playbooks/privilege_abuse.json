@@ -1,0 +1,35 @@
+{
+  "playbook_id": "privilege_abuse",
+  "name": "Investigation - Abus de privileges IAM",
+  "description": "Declenche lorsqu'un compte s'attribue ou obtient une politique IAM sensible, ou cree une cle d'acces suspecte.",
+  "applicable_finding_types": ["PRIVILEGE_ESCALATION"],
+  "priority": "CRITICAL",
+  "tasks": [
+    {
+      "worker_name": "aws_collector",
+      "action": "collect_iam_policy_history",
+      "description": "Recuperer l'historique complet des changements de politiques IAM pour l'acteur concerne."
+    },
+    {
+      "worker_name": "correlation_worker",
+      "action": "correlate_actor_activity",
+      "description": "Identifier toutes les actions recentes de cet acteur (connexions, appels API) pour etablir le contexte complet."
+    },
+    {
+      "worker_name": "timeline_worker",
+      "action": "build_privilege_change_timeline",
+      "description": "Construire la chronologie precise entre la connexion de l'acteur et l'attribution de la politique sensible."
+    },
+    {
+      "worker_name": "ai_analysis_worker",
+      "action": "summarize_case",
+      "description": "Generer un resume de l'incident, avec une evaluation du niveau de risque de la politique attribuee."
+    }
+  ],
+  "recommended_actions": [
+    "Verifier si cette attribution de politique correspond a une demande de changement approuvee (ticket, ticket de changement)",
+    "Envisager la revocation de la politique sensible attribuee, apres validation par un analyste",
+    "Verifier si l'acteur a cree d'autres cles d'acces ou modifie d'autres politiques recemment",
+    "Envisager une revue des permissions de l'acteur avec le proprietaire du compte"
+  ]
+}

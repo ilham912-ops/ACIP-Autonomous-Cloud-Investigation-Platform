@@ -5,11 +5,13 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import pytest
 import asyncio
 from app.services.event_queue import event_queue
 from app.services.websocket_manager import websocket_manager
 
 
+@pytest.mark.asyncio
 async def test_event_queue():
     """Test the event queue"""
     print("🧪 Testing event queue...")

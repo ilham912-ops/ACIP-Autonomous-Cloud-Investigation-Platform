@@ -1,0 +1,35 @@
+{
+  "playbook_id": "c2_beaconing_investigation",
+  "name": "Investigation - Beaconing C2",
+  "description": "Declenche lorsqu'un rythme de connexions regulier vers une meme destination suggere un canal de commande et controle (C2).",
+  "applicable_finding_types": ["C2_BEACONING"],
+  "priority": "CRITICAL",
+  "tasks": [
+    {
+      "worker_name": "aws_collector",
+      "action": "collect_vpc_flow_logs",
+      "description": "Recuperer l'historique complet des connexions entre la source et la destination suspecte."
+    },
+    {
+      "worker_name": "correlation_worker",
+      "action": "correlate_destination_reputation",
+      "description": "Verifier la reputation du domaine/IP de destination et rechercher d'autres ressources internes qui le contactent."
+    },
+    {
+      "worker_name": "timeline_worker",
+      "action": "build_beaconing_timeline",
+      "description": "Construire la chronologie complete des connexions pour visualiser la regularite du rythme observe."
+    },
+    {
+      "worker_name": "ai_analysis_worker",
+      "action": "summarize_case",
+      "description": "Generer un resume de l'incident et une evaluation du niveau de compromission potentielle de la ressource source."
+    }
+  ],
+  "recommended_actions": [
+    "Isoler la ressource source du reste de l'environnement, apres validation par un analyste",
+    "Analyser la ressource source pour rechercher un processus malveillant a l'origine du beacon",
+    "Bloquer la destination au niveau du pare-feu sortant, apres confirmation de sa nature malveillante",
+    "Verifier si d'autres ressources internes contactent la meme destination"
+  ]
+}

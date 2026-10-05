@@ -1,0 +1,50 @@
+[
+  {
+    "eventID": "sample-1",
+    "eventName": "ConsoleLogin",
+    "eventTime": "2026-08-14T09:00:00Z",
+    "sourceIPAddress": "203.0.113.77",
+    "userIdentity": {"type": "IAMUser", "arn": "arn:aws:iam::123456789012:user/jdupont"},
+    "responseElements": {"ConsoleLogin": "Failure"}
+  },
+  {
+    "eventID": "sample-2",
+    "eventName": "ConsoleLogin",
+    "eventTime": "2026-08-14T09:00:20Z",
+    "sourceIPAddress": "203.0.113.77",
+    "userIdentity": {"type": "IAMUser", "arn": "arn:aws:iam::123456789012:user/jdupont"},
+    "responseElements": {"ConsoleLogin": "Failure"}
+  },
+  {
+    "eventID": "sample-3",
+    "eventName": "ConsoleLogin",
+    "eventTime": "2026-08-14T09:00:45Z",
+    "sourceIPAddress": "203.0.113.77",
+    "userIdentity": {"type": "IAMUser", "arn": "arn:aws:iam::123456789012:user/jdupont"},
+    "responseElements": {"ConsoleLogin": "Failure"}
+  },
+  {
+    "eventID": "sample-4",
+    "eventName": "ConsoleLogin",
+    "eventTime": "2026-08-14T09:01:10Z",
+    "sourceIPAddress": "203.0.113.77",
+    "userIdentity": {"type": "IAMUser", "arn": "arn:aws:iam::123456789012:user/jdupont"},
+    "responseElements": {"ConsoleLogin": "Failure"}
+  },
+  {
+    "eventID": "sample-5",
+    "eventName": "ConsoleLogin",
+    "eventTime": "2026-08-14T09:01:35Z",
+    "sourceIPAddress": "203.0.113.77",
+    "userIdentity": {"type": "IAMUser", "arn": "arn:aws:iam::123456789012:user/jdupont"},
+    "responseElements": {"ConsoleLogin": "Failure"}
+  },
+  {
+    "eventID": "sample-6",
+    "eventName": "AttachUserPolicy",
+    "eventTime": "2026-08-14T09:15:00Z",
+    "sourceIPAddress": "203.0.113.77",
+    "userIdentity": {"type": "IAMUser", "arn": "arn:aws:iam::123456789012:user/jdupont"},
+    "requestParameters": {"policyArn": "arn:aws:iam::aws:policy/AdministratorAccess"}
+  }
+]

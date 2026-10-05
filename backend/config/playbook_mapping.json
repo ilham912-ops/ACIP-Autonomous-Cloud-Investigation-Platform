@@ -1,0 +1,7 @@
+{
+  "BRUTE_FORCE": "credential_attack",
+  "PRIVILEGE_ESCALATION": "privilege_abuse",
+  "MASS_DOWNLOAD": "exfiltration_s3",
+  "PORT_SCAN": "port_scan_investigation",
+  "C2_BEACONING": "c2_beaconing_investigation"
+}

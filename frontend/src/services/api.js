@@ -131,5 +131,12 @@ export const ruleAPI = {
     return response.data;
   },
 };
-
+// ===== DASHBOARD API =====
+export const dashboardAPI = {
+  // Get security dashboard metrics
+  getSummary: async () => {
+    const response = await api.get('/dashboard/summary');
+    return response.data;
+  },
+};
 export default api;

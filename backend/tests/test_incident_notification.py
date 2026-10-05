@@ -1,6 +1,7 @@
 """
 Test full incident creation with Telegram notification
 """
+import pytest
 import asyncio
 import sys
 import os
@@ -14,27 +15,42 @@ from app.domain.models.event import NormalizedEvent
 from datetime import datetime
 import uuid
 
+@pytest.mark.asyncio
 async def test_full_flow():
     """Test incident creation with Telegram notification"""
     print("🔍 Testing full incident flow...")
     
     # Create a sample normalized event
     event = NormalizedEvent(
-        event_id=f"test-{uuid.uuid4().hex[:8]}",
-        event_name="ConsoleLogin",
-        provider="aws",
-        provider_type="cloudtrail",
-        severity="CRITICAL",
-        severity_score=95,
-        severity_reason="Root user login from unknown IP address with failed MFA attempts",
-        actor="root",
-        actor_type="Root",
-        actor_ip="203.0.113.45",
-        region="us-east-1",
-        resource="arn:aws:iam::123456789012:user/root",
-        timestamp=datetime.utcnow(),
-        tags=["security", "critical", "unauthorized"]
-    )
+    event_id=f"test-{uuid.uuid4().hex[:8]}",
+
+    event_name="ConsoleLogin",
+    event_type="authentication",
+    event_description="Root user login from an unknown IP address",
+    event_category="security",
+
+    provider="aws",
+    provider_type="cloudtrail",
+
+    severity="CRITICAL",
+    severity_score=95,
+    severity_reason="Root user login from unknown IP address with failed MFA attempts",
+
+    actor="root",
+    actor_type="Root",
+    actor_ip="203.0.113.45",
+
+    resource="arn:aws:iam::123456789012:user/root",
+    resource_type="iam_user",
+
+    action="ConsoleLogin",
+    result="SUCCESS",
+
+    region="us-east-1",
+    timestamp=datetime.utcnow(),
+
+    tags=["security", "critical", "unauthorized"]
+)
     
     print(f"📝 Created test event: {event.event_name}")
     print(f"   Severity: {event.severity} (Score: {event.severity_score})")

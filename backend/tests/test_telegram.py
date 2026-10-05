@@ -1,6 +1,7 @@
 """
 Test script for Telegram notification
 """
+import pytest
 import asyncio
 import sys
 sys.path.append('.')  # Add project root to path
@@ -8,6 +9,7 @@ sys.path.append('.')  # Add project root to path
 from app.services.telegram_notifier import TelegramNotifier
 from app.core.config import settings
 
+@pytest.mark.asyncio
 async def test_telegram():
     """Test the Telegram notifier"""
     print("📤 Testing Telegram notification...")

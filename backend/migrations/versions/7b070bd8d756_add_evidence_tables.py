@@ -1,10 +1,4 @@
 # migrations/versions/xxxx_add_evidence_tables.py
-"""Add evidence tables
-
-Revision ID: xxxx
-Revises: previous_revision
-Create Date: 2026-08-10 12:00:00.000000
-"""
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import UUID, JSONB

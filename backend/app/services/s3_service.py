@@ -14,7 +14,7 @@ class S3Service:
             region_name=os.getenv("AWS_DEFAULT_REGION", "us-east-1"),
             config=Config(signature_version='s3v4')
         )
-        self.bucket = "acip-evidence-dev"
+        self.bucket = "acip-evidence"
     
     def upload_file(self, incident_id: str, filename: str, content: bytes):
         key = f"incidents/{incident_id}/{filename}"

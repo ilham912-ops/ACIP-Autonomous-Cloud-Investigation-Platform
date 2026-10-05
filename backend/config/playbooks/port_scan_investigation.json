@@ -1,0 +1,29 @@
+{
+  "playbook_id": "port_scan_investigation",
+  "name": "Investigation - Scan de ports",
+  "description": "Declenche lorsqu'une meme IP source contacte un grand nombre de ports distincts sur une courte fenetre de temps.",
+  "applicable_finding_types": ["PORT_SCAN"],
+  "priority": "HIGH",
+  "tasks": [
+    {
+      "worker_name": "aws_collector",
+      "action": "collect_vpc_flow_logs",
+      "description": "Recuperer l'ensemble des flux reseau impliquant l'IP source sur les dernieres 24 heures."
+    },
+    {
+      "worker_name": "correlation_worker",
+      "action": "correlate_source_ip_reputation",
+      "description": "Verifier la reputation de l'IP source (listes de menaces connues) et son historique d'activite sur le compte."
+    },
+    {
+      "worker_name": "ai_analysis_worker",
+      "action": "summarize_case",
+      "description": "Generer un resume de l'incident et une evaluation du risque de reconnaissance active."
+    }
+  ],
+  "recommended_actions": [
+    "Verifier si l'IP source correspond a un outil de scan de securite legitime (audit interne planifie)",
+    "Envisager le blocage de l'IP source au niveau du security group ou du NACL, apres validation par un analyste",
+    "Verifier si des ports sensibles (ex: 22, 3389, 5432) ont ete contactes avec succes"
+  ]
+}

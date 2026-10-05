@@ -1,0 +1,35 @@
+{
+  "Rules": [
+    {
+      "ID": "raw-events-expire-90-days",
+      "Filter": { "Prefix": "raw-events/" },
+      "Status": "Enabled",
+      "Expiration": { "Days": 90 },
+      "Transitions": [
+        { "Days": 30, "StorageClass": "GLACIER" }
+      ]
+    },
+    {
+      "ID": "evidence-transition-glacier",
+      "Filter": { "Prefix": "evidence/" },
+      "Status": "Enabled",
+      "Transitions": [
+        { "Days": 60, "StorageClass": "GLACIER" }
+      ]
+    },
+    {
+      "ID": "reports-keep-standard",
+      "Filter": { "Prefix": "reports/" },
+      "Status": "Enabled",
+      "Transitions": [
+        { "Days": 180, "StorageClass": "GLACIER" }
+      ]
+    },
+    {
+      "ID": "exports-expire-30-days",
+      "Filter": { "Prefix": "exports/" },
+      "Status": "Enabled",
+      "Expiration": { "Days": 30 }
+    }
+  ]
+}
